@@ -6,9 +6,9 @@ import Pin from "../models/Pin.js";
 const createPin = asyncHandler(async (req, res) => {
     // const newPin = new Pin(req.body); 
     // can destructure req.body object 
-    const { username, title, description, rating, latitude, longitude } = req.body; 
+    const { username, title, description, rating, location } = req.body; 
     // error check 
-    if(!username || !title || !description || !rating || !latitude || !longitude) {
+    if(!username || !title || !description || !rating || !location) {
         res.status(400); 
         throw new Error("Please add all fields"); 
     }; 

@@ -4,9 +4,6 @@ const PinSchema = mongoose.Schema({
     username: {
         type: String, 
         required: true, 
-        min: 3, 
-        max: 20, 
-        unique: true, 
     }, 
     title: {
         type: String, 
@@ -24,13 +21,16 @@ const PinSchema = mongoose.Schema({
         min: 0, 
         max: 5, 
     }, 
-    latitude: {
-        type: Number, 
-        required: true, 
-    }, 
-    longitude: {
-        type: Number, 
-        required: true, 
+    // GeoJSON (as per docs) 
+    location: {
+        type: {
+            type: String, 
+            enum: ["Point"], 
+        }, 
+        coordinates: {
+            type: [Number], // longitude, latitude (as per docs) 
+            index: "2dsphere"
+        },
     }, 
 }, {
     timestamps: true, 
