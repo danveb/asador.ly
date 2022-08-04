@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Saira+Semi+Condensed:wght@100;200;300;400&family=Yrsa:wght@300;400&family=Square+Peg&family=Prata&display=swap');
+
+* {
+    box-sizing: border-box; 
+    padding: 0; 
+    margin: 0; 
+}
+
+body {
+    font-family: "Yrsa", "Square Peg", "Prata", "Saira Semi Condensed", "Poppins", sans-serif; 
+    font-weight: 300; 
+    background-color: #000; 
+}
+
+/* Chrome Scrollbar change width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 20px;
+    border: transparent;
+}
