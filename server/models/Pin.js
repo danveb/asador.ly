@@ -16,9 +16,15 @@ const PinSchema = mongoose.Schema({
         min: 3, 
     }, 
     rating: {
-        type: String, 
+        type: Number, 
         required: true, 
-        min: 0, 
+        min: 1, 
+        max: 5, 
+    }, 
+    cost: {
+        type: Number, 
+        required: true, 
+        min: 1, 
         max: 5, 
     }, 
     // GeoJSON (as per docs) 
