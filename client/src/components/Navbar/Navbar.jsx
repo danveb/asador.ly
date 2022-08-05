@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"; 
 import { links } from "../../constants/links"; 
-import PersonPinIcon from '@mui/icons-material/PersonPin';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./Navbar.scss"; 
 
