@@ -14,8 +14,14 @@ const generateToken = (id) => {
 // @route: POST /api/users/register
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body; 
-    // error check 
-    if(!username || !email || !password) {
+    // username/password length check 
+    if(username.length < 3) {
+        res.status(400); 
+        throw new Error("Please create a new username. Minimum length is 3 characters."); 
+    } else if(password.length < 4) {
+        res.status(400); 
+        throw new Error("Please create a new password. Minimum length is 4 characters"); 
+    } else if(!username || !email || !password) {
         res.status(400); 
         throw new Error("Please add all fields"); 
     }; 
