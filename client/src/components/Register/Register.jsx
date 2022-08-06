@@ -1,8 +1,72 @@
-import { Link } from "react-router-dom"; 
-import { Navbar, Menu } from "../index"; 
+import { useState, useEffect } from "react"; 
+import { Link, useNavigate } from "react-router-dom"; 
+import { Navbar, Menu, Spinner } from "../index"; 
+import { useSelector, useDispatch } from "react-redux"; 
+import { register, reset } from "../../redux/auth/authSlice"; 
+import { toast } from "react-toastify"; 
 import "./Register.scss"; 
 
 const Register = ({ menuOpen, setMenuOpen }) => {
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+    }); 
+
+    // destructure formData 
+    const { username, email, password } = formData; 
+
+    // useNavigate 
+    const navigate = useNavigate(); 
+
+    // useDispatch
+    const dispatch = useDispatch(); 
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth); 
+
+    // useEffect 
+    useEffect(() => {
+        if(isError) {
+            toast.error(message); 
+        }; 
+        if(isSuccess || user) {
+            navigate("/"); 
+        }; 
+        dispatch(reset()); 
+    // dependency   
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+
+    // handleChange
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState, 
+            [e.target.name]: e.target.value
+        })); 
+    }; 
+
+    // handleSubmit 
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+        const userData = {
+            username, 
+            email, 
+            password
+        }; 
+        // error checking with toast... 
+        if(username.length < 3) {
+            toast.error("Please create a new username. Minimum length is 3 characters.")
+        } else if(password.length < 4) {
+            toast.error("Please create a new password. Minimum length is 4 characters."); 
+        } else {
+            dispatch(register(userData)); 
+            navigate("/"); 
+        }
+    }; 
+
+    if(isLoading) {
+        return <Spinner />
+    }; 
+
     return (
         <div>
             <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> 
@@ -13,21 +77,39 @@ const Register = ({ menuOpen, setMenuOpen }) => {
                         <h1>Register</h1>
                         <p>Create an account to share with us your favorite <span>parrillas</span> in Buenos Aires.</p>
                     </div>
-                    <form className="register-form">
-                        <label>Username</label>
+                    <form className="register-form" onSubmit={handleSubmit}>
+                        <label
+                            htmlFor="username"
+                        >Username</label>
                         <input 
+                            id="username"
+                            name="username"
+                            value={username} 
+                            onChange={handleChange}
                             type="text" 
                             placeholder="Create a username" 
                             required
                         />
-                        <label>Email</label>
+                        <label
+                            htmlFor="email"
+                        >Email</label>
                         <input 
+                            id="email"
+                            name="email"
+                            value={email} 
+                            onChange={handleChange}
                             type="email" 
                             placeholder="Your email address" 
                             required
                         />
-                        <label>Password</label>
+                        <label
+                            htmlFor="password"
+                        >Password</label>
                         <input 
+                            id="password"
+                            name="password"
+                            value={password} 
+                            onChange={handleChange}
                             type="password" 
                             placeholder="Your password" 
                             required

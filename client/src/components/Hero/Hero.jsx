@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react"; 
-import axios from "axios"; 
+import Spinner from "../Spinner/Spinner";
 import Map, { Marker, Popup } from "react-map-gl";
 import RoomIcon from '@mui/icons-material/Room';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { useSelector, useDispatch } from "react-redux"; 
+import { createPin, getPins, reset } from "../../redux/pins/pinSlice"; 
 import "./Hero.scss"; 
+import { toast } from "react-toastify";
 
 const Hero = () => {
-    // sample user 
-    const currentUser = "peach"; 
+    const { user } = useSelector((state) => state.auth); 
+    const { pins, isLoading, isError, message } = useSelector((state) => state.pins); 
+
+    // useDispatch
+    const dispatch = useDispatch(); 
+
+    // useState
     const [viewState, setViewState] = useState({
         // main coordinates for center view
         longitude: -58.403578,
@@ -16,27 +24,31 @@ const Hero = () => {
         zoom: 11.5
     });
     const [showPopup] = useState(true); 
-    const [pins, setPins] = useState([]); 
     const [currentPlaceId, setCurrentPlaceId] = useState(null); 
     const [newPlace, setNewPlace] = useState(null); 
-    const [title, setTitle] = useState(null); 
-    const [description, setDescription] = useState(null); 
-    const [rating, setRating] = useState(null); 
-    const [cost, setCost] = useState(null); 
+    const [formData, setFormData] = useState({
+        title: "", 
+        description: "", 
+        rating: "", 
+        cost: "", 
+    });
 
-    // useEffect to fetch data 
+    const { title, description, rating, cost } = formData; 
+
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState, 
+            [e.target.name]: e.target.value
+        })); 
+    }; 
+
+    // useEffect
     useEffect(() => {
-        const getPins = async () => {
-            try {
-                const response = await axios.get("/pins"); 
-                setPins(response.data); 
-            } catch(error) {
-                console.log(error)
-            }; 
-        }; 
-        getPins(); 
-    // empty dependency; we want AXIOS to fire when refreshing page
-    }, []);
+        if(isError) {
+            console.log(message); 
+        }
+        dispatch(getPins()); 
+    }, []); 
 
     // handleMarkerClick
     const handleMarkerClick = (id, long, lat) => {
@@ -50,34 +62,37 @@ const Hero = () => {
 
     // handleAddClick 
     const handleAddClick = (e) => {
-        const latitude = e.lngLat.lat; 
-        const longitude = e.lngLat.lng; 
-        setNewPlace({
-            lat: latitude,
-            lng: longitude, 
-        }); 
+        if(user) {
+            const latitude = e.lngLat.lat; 
+            const longitude = e.lngLat.lng; 
+            setNewPlace({
+                lat: latitude,
+                lng: longitude, 
+            }); 
+        } else {
+            toast("Please consider creating an account to add a new place."); 
+        }; 
     }; 
 
-    // handleSubmit
-    const handleSubmit = async (e) => {
+    // handleSubmit (REDUX) 
+    const handleSubmit = (e) => {
         e.preventDefault(); 
-        const newPin = {
-            username: currentUser, 
-            title, 
+        const pinData = {
+            username: user.username, 
+            title,
             description, 
             rating, 
             cost, 
             location: {
                 coordinates: [newPlace.lng, newPlace.lat] 
-            }
-        };
-        try {
-            const response = await axios.post("/pins", newPin); 
-            setPins([...pins, response.data]); 
-            setNewPlace(null); 
-        } catch(error) {
-            console.log(error); 
-        };
+            }, 
+        }; 
+        console.log(pinData); 
+        dispatch(createPin(pinData)); 
+    }; 
+
+    if(isLoading) {
+        return <Spinner />
     }; 
     
     return (
@@ -96,18 +111,17 @@ const Hero = () => {
                 onDblClick={handleAddClick}
                 transition="300"
             >
-                {pins.map((pin) => (
-                    <div key={pin._id}>
+                {pins.map((pin, idx) => (
+                    <div key={idx}>
                         <Marker 
                             longitude={pin.location.coordinates[0]} 
                             latitude={pin.location.coordinates[1]} 
                             anchor="bottom" 
                             offsetLeft={-viewState.zoom * 3.5}
                             offsetTop={-viewState.zoom * 7}
-                            key={pin._id} 
                         >
                             <RoomIcon 
-                                style={{ color: currentUser === pin.username ? "crimson" : "purple", fontSize: viewState.zoom * 4, cursor: "pointer" }}
+                                style={{ color: "crimson", fontSize: viewState.zoom * 4, cursor: "pointer" }}
                                 onClick={() => handleMarkerClick(pin._id, pin.location.coordinates[0], pin.location.coordinates[1])}
                             />
                         </Marker>
@@ -149,32 +163,58 @@ const Hero = () => {
                     >
                         <div>
                             <form onSubmit={handleSubmit}>
-                                <label>Title</label>
+                                <label 
+                                    htmlFor="title"
+                                >Title</label>
                                 <input 
+                                    id="title"
+                                    name="title"
+                                    value={title}
                                     placeholder="Enter Title" 
-                                    onChange={(e) => setTitle(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                 />
-                                <label>Description</label>
+                                <label 
+                                    htmlFor="description"
+                                >Description</label>
                                 <textarea 
+                                    id="description"
+                                    name="description"
+                                    value={description}
                                     placeholder="Want To Share About This Steakhouse?"
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    onChange={handleChange}
                                 />
-                                <label>Rating</label>
-                                <select onChange={(e) => setRating(e.target.value)}>
-                                    <option default value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                <label 
+                                    htmlFor="rating"
+                                >Rating</label>
+                                <select 
+                                    id="rating"
+                                    name="rating"
+                                    value={rating}
+                                    onChange={handleChange}
+                                >
+                                    <option defaultValue={"default"}>Choose an option</option>
+                                    <option value={"1"}>1</option>
+                                    <option value={"2"}>2</option>
+                                    <option value={"3"}>3</option>
+                                    <option value={"4"}>4</option>
+                                    <option value={"5"}>5</option>
                                 </select>
-                                <label>Cost</label>
-                                <select onChange={(e) => setCost(e.target.value)}>
-                                    <option default value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                <label 
+                                    htmlFor="cost"
+                                >Cost</label>
+                                <select 
+                                    id="cost"
+                                    name="cost"
+                                    value={cost}
+                                    onChange={handleChange}
+                                >
+                                    <option defaultValue={"default"}>Choose an option</option>
+                                    <option value={"1"}>1</option>
+                                    <option value={"2"}>2</option>
+                                    <option value={"3"}>3</option>
+                                    <option value={"4"}>4</option>
+                                    <option value={"5"}>5</option>
                                 </select>
                                 <button className="submit-btn" type="submit">Add Pin</button>
                             </form>

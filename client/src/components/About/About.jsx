@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"; 
-import { Navbar, Menu, Footer } from "../components/index"; 
-import brasa from "../assets/about/brasa.png"; 
+import { Navbar, Menu, Footer } from "../index"; 
+import brasa from "../../assets/about/brasa.png"; 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import "./About.scss"; 
 
