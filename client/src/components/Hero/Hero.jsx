@@ -9,6 +9,12 @@ import { createPin, getPins, reset } from "../../redux/pins/pinSlice";
 import "./Hero.scss"; 
 import { toast } from "react-toastify";
 
+// workaround for mapbox failing (transpile issues with Babel) 
+import mapboxgl from 'mapbox-gl';
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 const Hero = () => {
     const { user } = useSelector((state) => state.auth); 
     const { pins, isLoading, isError, message } = useSelector((state) => state.pins); 
