@@ -48,7 +48,7 @@ const Hero = () => {
             console.log(message); 
         }
         dispatch(getPins()); 
-    }, []); 
+    }, [dispatch, isError, message]); 
 
     // handleMarkerClick
     const handleMarkerClick = (id, long, lat) => {
@@ -89,6 +89,7 @@ const Hero = () => {
         }; 
         console.log(pinData); 
         dispatch(createPin(pinData)); 
+        dispatch(reset()); 
     }; 
 
     if(isLoading) {

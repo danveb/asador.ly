@@ -16,18 +16,6 @@ app.use(express.json()); // parse JSON
 app.use(express.urlencoded({ extended: false })); 
 app.use(errorHandler); 
 
-// For Frontend (running production)
-if(process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/build"))); 
-    app.get("*", (req, res) => [
-        res.sendFile(path.resolve(__dirname, "../", "client", "build", "index.html"))
-    ]); 
-} else {
-    app.get("/", (req, res) => {
-        res.send("Please set to production!"); 
-    }); 
-}; 
-
 // Sample Request on localhost:8800 
 app.get("/", (req, res) => {
     res.send("Hello World!"); 
