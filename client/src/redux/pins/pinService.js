@@ -1,16 +1,22 @@
 import axios from "axios"; 
 
-const API_URL = "/api/pins/"; 
+// Production
+// const API_URL = "/api/pins/"; 
+
+// Deployment 
+const API_URL = process.env.REACT_APP_API_URL; 
+const CREATE_URL = `${API_URL}/api/pins`; 
+const GET_URL = `${API_URL}/api/pins`;
 
 // Create pin
 const createPin = async (pinData) => {
-    const response = await axios.post(API_URL, pinData); 
+    const response = await axios.post(CREATE_URL, pinData); 
     return response.data; 
 }; 
 
 // Get Pins
 const getPins = async () => {
-    const response = await axios.get(API_URL); 
+    const response = await axios.get(GET_URL); 
     return response.data; 
 }; 
 

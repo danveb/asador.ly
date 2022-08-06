@@ -27,11 +27,24 @@ const Register = ({ menuOpen, setMenuOpen }) => {
     // useEffect 
     useEffect(() => {
         if(isError) {
-            toast.error(message); 
+            toast.error("Sorry, an error occured. Try again or create a new account.", {
+                position: "top-center", 
+                autoClose: 2000, 
+                pauseOnHover: true, 
+            });
         }; 
-        if(isSuccess || user) {
+        if(isSuccess) {
+            toast.success(`Welcome ${user.username} 🎉 `, {
+                position: "top-center", 
+                autoClose: 1500, 
+                pauseOnHover: false, 
+            }); 
             navigate("/"); 
         }; 
+        // redirect existing user back home
+        if(user) {
+            navigate("/"); 
+        }
         dispatch(reset()); 
     // dependency   
     }, [user, isError, isSuccess, message, navigate, dispatch])
@@ -59,8 +72,7 @@ const Register = ({ menuOpen, setMenuOpen }) => {
             toast.error("Please create a new password. Minimum length is 4 characters."); 
         } else {
             dispatch(register(userData)); 
-            navigate("/"); 
-        }
+        }; 
     }; 
 
     if(isLoading) {

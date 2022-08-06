@@ -4,6 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from "react-redux"; 
 import { logout, reset } from "../../redux/auth/authSlice"; 
+import { toast } from "react-toastify"; 
 import "./Navbar.scss"; 
 
 const Navbar = ({ menuOpen, setMenuOpen }) => {
@@ -20,6 +21,11 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
     const handleLogout = () => {
         dispatch(logout()); 
         dispatch(reset()); 
+        toast.info(`Sad to see you go ${user.username} 😭 `, {
+            position: "top-center", 
+            autoClose: 2000, 
+            pauseOnHover: false, 
+        });
         navigate("/"); 
     }; 
 

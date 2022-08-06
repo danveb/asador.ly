@@ -42,9 +42,9 @@
             justify-content: center; 
             flex-direction: row; 
             list-style: none; 
+            gap: 25px; 
             
             li {
-                margin: 0 15px; 
                 cursor: pointer; 
 
                 a {
@@ -60,11 +60,18 @@
 
             li {
                 &:last-child {                   
+                    display: flex; 
+                    justify-content: center; 
+                    align-items: center; 
+
                     a {
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: center; 
-                        cursor: pointer; 
+                        height: 20px; 
+                        width: 20px; 
+                    }
+
+                    svg {
+                        height: 20px; 
+                        width: 20px; 
                     }
 
                     &:hover {

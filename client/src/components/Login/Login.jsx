@@ -27,11 +27,24 @@ const Login = ({ menuOpen, setMenuOpen }) => {
     // useEffect 
     useEffect(() => {
         if(isError) {
-            toast.error(message); 
+            toast.error("Invalid username/password", {
+                position: "top-center", 
+                autoClose: 2000, 
+                pauseOnHover: true, 
+            }); 
         }; 
-        if(isSuccess || user) {
+        if(isSuccess) {
+            toast.success(`Welcome back ${user.username} 👋 `, {
+                position: "top-center", 
+                autoClose: 1500, 
+                hideProgressBar: true, 
+            }); 
             navigate("/"); 
         }; 
+        // redirect existing user back to home
+        if(user) {
+            navigate("/"); 
+        }
         dispatch(reset()); 
     // dependency   
     }, [user, isError, isSuccess, message, navigate, dispatch])
@@ -51,14 +64,13 @@ const Login = ({ menuOpen, setMenuOpen }) => {
             username, 
             password, 
         }; 
-        // error checking with toast... 
+        // // error checking with toast... 
         if(username.length < 3) {
-            toast.error("Please create a new username. Minimum length is 3 characters.")
+            toast.error("Username incorrect. Minimum length is 3 characters.");
         } else if(password.length < 4) {
-            toast.error("Please create a new password. Minimum length is 4 characters."); 
+            toast.error("Password incorrect. Minimum length is 4 characters."); 
         } else {
             dispatch(login(userData)); 
-            navigate("/"); 
         }
     }; 
 

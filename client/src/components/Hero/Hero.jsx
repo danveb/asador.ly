@@ -51,8 +51,12 @@ const Hero = () => {
     // useEffect
     useEffect(() => {
         if(isError) {
-            console.log(message); 
-        }
+            toast.error("Sorry, there was an error. Retrying", {
+                position: "top-center", 
+                autoClose: 2500, 
+                pauseOnHover: false, 
+            }); 
+        } 
         dispatch(getPins()); 
     }, [dispatch, isError, message]); 
 
@@ -76,7 +80,11 @@ const Hero = () => {
                 lng: longitude, 
             }); 
         } else {
-            toast("Please consider creating an account to add a new place."); 
+            toast("Would you like to create an account? 👉", {
+                position: "top-center", 
+                autoClose: 3500, 
+                pauseOnHover: false,
+            }); 
         }; 
     }; 
 
@@ -93,9 +101,20 @@ const Hero = () => {
                 coordinates: [newPlace.lng, newPlace.lat] 
             }, 
         }; 
-        console.log(pinData); 
         dispatch(createPin(pinData)); 
-        dispatch(reset()); 
+        setFormData({
+            title: "", 
+            description: "", 
+            rating: "", 
+            cost: "", 
+        }); 
+        setNewPlace(null); 
+        dispatch(reset());
+        toast.success("Pin added 🥳 ", {
+            position: "top-center", 
+            autoClose: 3000, 
+            pauseOnHover: false, 
+        }); 
     }; 
 
     if(isLoading) {
@@ -118,19 +137,19 @@ const Hero = () => {
                 onDblClick={handleAddClick}
                 transition="300"
             >
-                {pins.map((pin, idx) => (
-                    <div key={idx}>
+                {pins.map((pin) => (
+                    <div key={pin._id}>
                         <Marker 
                             longitude={pin.location.coordinates[0]} 
                             latitude={pin.location.coordinates[1]} 
                             anchor="bottom" 
                             offsetLeft={-viewState.zoom * 3.5}
                             offsetTop={-viewState.zoom * 7}
-                        >
-                            <RoomIcon 
-                                style={{ color: "crimson", fontSize: viewState.zoom * 4, cursor: "pointer" }}
-                                onClick={() => handleMarkerClick(pin._id, pin.location.coordinates[0], pin.location.coordinates[1])}
-                            />
+                            >
+                        <RoomIcon 
+                            style={{ color: "crimson", fontSize: viewState.zoom * 4, cursor: "pointer" }}
+                            onClick={() => handleMarkerClick(pin._id, pin.location.coordinates[0], pin.location.coordinates[1])}
+                        />
                         </Marker>
                         {showPopup && pin._id === currentPlaceId && (
                             <Popup 
