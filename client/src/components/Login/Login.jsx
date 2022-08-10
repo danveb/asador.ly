@@ -86,7 +86,7 @@ const Login = ({ menuOpen, setMenuOpen }) => {
                 <div className="login-top">
                     <div className="login-title">
                         <h1>Login</h1>
-                        <p>Create an account to share with us your favorite <span>parrillas</span> in Buenos Aires.</p>
+                        <p>Login and start pinning your favorite <span>parrillas</span> in Buenos Aires.</p>
                     </div>
                     <form className="login-form" onSubmit={handleSubmit}>
                         <label
