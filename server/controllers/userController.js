@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const userExists = await User.findOne({ username }); 
     if(userExists) {
         res.status(400); 
-        throw new Error("User already exists"); 
+        throw new Error("User already exists. Please choose a different username/email/password"); 
     }; 
 
     // hash password with BCRYPTJS 
@@ -59,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
         }); 
     } else {
         res.status(400); 
-        throw new Error("Invalid User"); 
+        throw new Error("Sorry, an error occured. Try again or create a new account."); 
     }; 
 }); 
 
@@ -71,7 +71,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ username }); 
     if(!user) {
         res.status(400); 
-        throw new Error("User not found"); 
+        throw new Error("Username not found. Please try again or create a new account."); 
     }
 
     // if correct user 
@@ -86,7 +86,7 @@ const loginUser = asyncHandler(async (req, res) => {
         }); 
     } else {
         res.status(400); 
-        throw new Error("Invalid Credentials"); 
+        throw new Error("Invalid credentials. Please try again or create a new account."); 
     }; 
 }); 
 

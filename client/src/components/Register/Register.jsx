@@ -27,7 +27,7 @@ const Register = ({ menuOpen, setMenuOpen }) => {
     // useEffect 
     useEffect(() => {
         if(isError) {
-            toast.error("Sorry, an error occured. Try again or create a new account.", {
+            toast.error(message, {
                 position: "top-center", 
                 autoClose: 2000, 
                 pauseOnHover: true, 

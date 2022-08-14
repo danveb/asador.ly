@@ -27,7 +27,7 @@ const Login = ({ menuOpen, setMenuOpen }) => {
     // useEffect 
     useEffect(() => {
         if(isError) {
-            toast.error("Invalid username/password", {
+            toast.error(message, {
                 position: "top-center", 
                 autoClose: 2000, 
                 pauseOnHover: true, 
