@@ -6,7 +6,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js", 
+    "data:import": "node seeder", 
+    "data:destroy": "node seeder -d"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
