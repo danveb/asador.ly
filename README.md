@@ -36,6 +36,12 @@ https://asador.netlify.app
 
 ---
 
+## Test Coverage
+- Performed testing with react-testing-library 
+```sh
+$ yarn test --watch
+```
+
 ## Project structure 
 
 ```sh
