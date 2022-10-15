@@ -50,7 +50,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 ```
 - Run all tests
 ```sh
-$ yarn test --allWatch
+$ yarn test --watchAll
 ```
 
 ## Project structure 
