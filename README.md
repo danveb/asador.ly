@@ -37,9 +37,20 @@ https://asador.netlify.app
 ---
 
 ## Test Coverage
-- Performed testing with react-testing-library 
+- Performed component testing with react-testing-library 
+- Need to disable the following lines on Hero component for tests to run
 ```sh
-$ yarn test --watch
+Hero.jsx -> line 12-16
+
+// workaround for mapbox failing (transpile issues with Babel) 
+import mapboxgl from 'mapbox-gl';
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+```
+- Run all tests
+```sh
+$ yarn test --allWatch
 ```
 
 ## Project structure 

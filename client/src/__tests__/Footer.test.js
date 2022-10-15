@@ -1,5 +1,4 @@
-import { render } from "@testing-library/react"; 
-import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from "@testing-library/react"; 
 import { store } from "../app/store"; 
 import { Provider } from "react-redux";
 import Footer from "../components/Footer/Footer"; 
@@ -26,12 +25,23 @@ describe("Footer component", () => {
 
     // getByText
     test("displays footer text", () => {
-        const { getByText } = render(
+        render(
             <Provider store={store}>
                 <Footer />
             </Provider>
         );
-        const footerText = getByText("© All rights reserved – Danny Bae"); 
+        const footerText = screen.getByText("© All rights reserved – Danny Bae"); 
         expect(footerText).toBeInTheDocument(); 
+    });
+
+    // getByRole
+    test("anchor tag should have a target attribute", () => {
+        render(
+            <Provider store={store}>
+                <Footer /> 
+            </Provider>
+        );
+        const anchor = screen.getByRole("link"); 
+        expect(anchor).toHaveAttribute("target"); 
     });
 });
