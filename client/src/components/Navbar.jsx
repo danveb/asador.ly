@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"; 
-import { links } from "../../constants/links"; 
+import { links } from "../constants/links"; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from "react-redux"; 
-import { logout, reset } from "../../redux/auth/authSlice"; 
+import { logout, reset } from "../redux/auth/authSlice"; 
 import { toast } from "react-toastify"; 
-import "./Navbar.scss"; 
+import "../styles/Navbar.scss"; 
 
 const Navbar = ({ menuOpen, setMenuOpen }) => {
     // useNavigate

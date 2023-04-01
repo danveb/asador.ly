@@ -1,5 +1,5 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
-import "./Footer.scss"; 
+import "../styles/Footer.scss"; 
 
 const Footer = () => {
     return (

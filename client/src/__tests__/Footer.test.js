@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"; 
 import { store } from "../app/store"; 
 import { Provider } from "react-redux";
-import Footer from "../components/Footer/Footer"; 
+import { Footer } from "../components";
 
 describe("Footer component", () => {
     // smoke test

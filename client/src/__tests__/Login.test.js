@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react"; 
 import { store } from "../app/store"; 
 import { Provider } from "react-redux";
-import Login from "../components/Login/Login"; 
+import { Login } from "../pages"; 
 import { BrowserRouter } from "react-router-dom";
 
 describe("Login component", () => {
@@ -37,7 +37,7 @@ describe("Login component", () => {
                 </BrowserRouter>
             </Provider>
         );
-        const paragraphTag = screen.getByText(/Login and start pinning your favorite/); 
+        const paragraphTag = screen.getByText(/Login and start pinning your favorite/i); 
         expect(paragraphTag).toBeInTheDocument(); 
     });
 

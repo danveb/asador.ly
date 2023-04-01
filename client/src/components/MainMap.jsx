@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"; 
-import Spinner from "../Spinner/Spinner";
+import Spinner from "./Spinner";
 import Map, { Marker, Popup } from "react-map-gl";
 import RoomIcon from '@mui/icons-material/Room';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useSelector, useDispatch } from "react-redux"; 
-import { createPin, getPins, reset } from "../../redux/pins/pinSlice"; 
-import "./Hero.scss"; 
+import { createPin, getPins, reset } from "../redux/pins/pinSlice"; 
+import "../styles/MainMap.scss"; 
 import { toast } from "react-toastify";
 
 // workaround for mapbox failing (transpile issues with Babel) 
-import mapboxgl from 'mapbox-gl';
+// import mapboxgl from 'mapbox-gl';
 // @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
-const Hero = () => {
+const MainMap = () => {
     const { user } = useSelector((state) => state.auth); 
     const { pins, isLoading, isError, message } = useSelector((state) => state.pins); 
 
@@ -122,7 +122,7 @@ const Hero = () => {
     }; 
     
     return (
-        <div className="hero">
+        <div className="mainMap">
             <Map
                 // controlled map (state)
                 {...viewState} 
@@ -252,4 +252,4 @@ const Hero = () => {
     )
 }
 
-export default Hero
+export default MainMap

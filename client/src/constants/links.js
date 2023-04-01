@@ -6,7 +6,7 @@ export const links = [
     },
     {
         id: 2, 
-        text: "About", 
-        path: "/about", 
+        text: "Map", 
+        path: "/map", 
     },
 ]; 
