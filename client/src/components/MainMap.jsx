@@ -10,10 +10,10 @@ import "../styles/MainMap.scss";
 import { toast } from "react-toastify";
 
 // workaround for mapbox failing (transpile issues with Babel) 
-// import mapboxgl from 'mapbox-gl';
-// @ts-ignore
+// production build renders mapbox map, but tests are failing in development 
+import mapboxgl from 'mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const MainMap = () => {
     const { user } = useSelector((state) => state.auth); 
