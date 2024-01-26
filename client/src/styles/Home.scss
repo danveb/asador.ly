@@ -1,0 +1,96 @@
+.home {
+  width: 100%;
+
+  .home__main {
+    height: calc(100vh - 55px);
+    background-image: url("../assets/about/brasa.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    .home__title {
+      position: absolute;
+      left: 3%;
+      top: 25%;
+      color: white;
+      width: 45%;
+
+      @media (max-width: 768px) {
+        position: initial;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 100px;
+        color: inherit;
+        margin-bottom: 20px;
+        font-size: 36px;
+        font-weight: 500;
+        font-family: "Prata", sans-serif;
+      }
+
+      p {
+        font-family: "Yrsa", sans-serif;
+        font-size: 20px;
+        font-weight: 200;
+        margin-bottom: 20px;
+        line-height: 1.6;
+
+        @media (max-width: 480px) {
+          font-size: 18px;
+        }
+      }
+
+      a {
+        display: inline-block;
+        width: max-content;
+        padding: 12px 26px;
+        text-decoration: none;
+        font-size: 15px;
+        letter-spacing: 1;
+        text-transform: uppercase;
+        color: #000;
+        background-color: #fff;
+        font-family: "Poppins", sans-serif;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .home__content {
+    height: 100%;
+    padding: 40px 24px;
+    background-color: #fff;
+    color: #000;
+    font-weight: 100;
+
+    .home__subtitle {
+      max-width: 1600px;
+      width: 50%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      p {
+        line-height: 1.7;
+      }
+
+      span {
+        font-style: italic;
+      }
+    }
+  }
+}
