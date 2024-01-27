@@ -7,7 +7,7 @@ import { logout, reset } from "../redux/auth/authSlice";
 import { toast } from "react-toastify";
 import "../styles/Navbar.scss";
 
-const Navbar = ({ menuOpen, setMenuOpen }) => {
+const Navbar = () => {
   // useNavigate
   const navigate = useNavigate();
 
@@ -30,12 +30,12 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
   };
 
   return (
-    <div className={"navbar " + (menuOpen && "active")}>
-      <div className="navbar-left">
+    <nav className="navbar">
+      <div className="nav__logo">
         <Link to="/">Asador</Link>
       </div>
-      <div className="navbar-right">
-        <ul className="navbar-links">
+      <div className="nav__main">
+        <ul className="nav__links">
           {links.map((link) => (
             <li key={link.id}>
               <Link to={link.path}>{link.text}</Link>
@@ -52,13 +52,8 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
           )
           }
         </ul>
-        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
       </div>
-    </div>
+    </nav>
   )
 }
 

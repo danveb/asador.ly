@@ -1,28 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Saira+Semi+Condensed:wght@100;200;300;400&family=Yrsa:wght@200;300;400&family=Square+Peg&family=Prata&display=swap');
 
-:root {
-  /* Palette Colors */
-  --raisin-black: #191c26;
-  --rich-black: #111319;
-  --cadet-blue-crayola: #a9afc3;
-  --han-purple: #4831d2;
-  --fuzzy-wuzzy: #de6868;
-  --ny-pink: #e89494;
-  --maximum-blue: #63a3bb;
-  --languid-lavender: #d2c7d5;
-  --alice-blue: #f4f9fc;
-  --alice-blue-matte: #edf2f8;
-  --prussian-blue: #10345c;
-  --bottle-green: #006241;
-  --baby-pink: #f5cac3;
-
-  /* Considering */
-  --powder-blue: #a1cdce;
-  --orange-red-crayola: #ff605c;
-  --maximum-yellow-red: #ffbd44;
-  --dark-pastel-green: #00ca4e;
-}
-
 /* CSS Reset */
 * {
   box-sizing: border-box;
