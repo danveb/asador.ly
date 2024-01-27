@@ -80,12 +80,18 @@
       justify-content: center;
       flex-direction: column;
 
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
       h2 {
         margin-bottom: 20px;
+        font-family: "Prata", sans-serif;
       }
 
       p {
         line-height: 1.7;
+        font-family: "Yrsa", sans-serif;
       }
 
       span {
