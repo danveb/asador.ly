@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Saira+Semi+Condensed:wght@100;200;300;400&family=Yrsa:wght@200;300;400&family=Square+Peg&family=Prata&display=swap');
 
+:root {
+  /* Palette */
+  --alice-blue: #f4f9fc;
+}
+
 /* CSS Reset */
 * {
   box-sizing: border-box;

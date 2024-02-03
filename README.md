@@ -1,4 +1,4 @@
-# asador.ly
+# asador
 
 ## The Problem 
 Have you ever heard about the famous Argentine steak? I'm pretty sure you've always wondered about asado (barbeque) in Buenos Aires and many of the steakhouses that serve the best meat. 
@@ -16,10 +16,10 @@ Login, registration, logout functionality with Redux Toolkit
 
 ---
 ## Live Code 
-- [Netlify](https://asador.netlify.app/) 
+https://asador.vercel.app/
 
 ## Source Code 
-- [GitHub](https://github.com/danveb/asador)
+https://github.com/danveb/asador
   
 ## Demo 
 https://asador.netlify.app

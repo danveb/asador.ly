@@ -7,29 +7,16 @@
   color: #000;
   background-color: var(--alice-blue);
 
-  .login-top {
-    max-width: 1600px;
-    width: 50%;
+  .login__wrapper {
+    max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 
-    @media screen and (max-width: 768px) {
-      width: 75%;
-    }
-
-    @media screen and (max-width: 480px) {
-      width: 100%;
-    }
-
-    .login-title {
-      font-family: "Prata", sans-serif;
+    .login__head {
 
       h1 {
         font-size: 56px;
-        font-family: inherit;
-        margin-bottom: 10px;
+        font-family: "Prata", sans-serif;
+        margin-bottom: 20px;
 
         @media screen and (max-width: 768px) {
           font-size: 46px;
@@ -55,33 +42,35 @@
       }
     }
 
-    .login-form {
+    .form {
       background-color: #fff;
       display: flex;
       flex-direction: column;
-      width: 100%;
-      height: auto;
-      padding: 2rem;
+      justify-content: center;
+      padding: 24px;
       border-radius: 10px;
+      font-family: "Poppins", sans-serif;
 
       label {
         line-height: 1em;
         letter-spacing: .1em;
-        font-size: 11px;
+        font-size: 13px;
         text-transform: uppercase;
         color: #000;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        font-family: inherit;
       }
 
       input {
         line-height: 1em;
         outline: 0;
         border: 1px solid #000;
-        padding: 0.875rem 0.75rem;
+        padding: 16px 22px;
         width: 100%;
         font-size: 12px;
         color: #000;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
+        font-family: inherit;
       }
 
       button {
@@ -92,17 +81,26 @@
         line-height: 1em;
         letter-spacing: .13em;
         font-size: 11px;
+        font-family: "Arial", sans-serif;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 20px;
       }
 
-      a {
-        color: #000;
-        text-decoration: none;
-        text-align: right;
-        cursor: pointer;
+      .register__link {
+        display: flex;
+        justify-content: flex-end;
+
+        a {
+          color: #3c3c3c;
+          text-decoration: none;
+          font-family: inherit;
+          font-size: 14px;
+          width: fit-content;
+          cursor: pointer;
+        }
       }
+
     }
   }
 }

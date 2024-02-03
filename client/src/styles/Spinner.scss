@@ -1,4 +1,4 @@
-.spinner-container {
+.spinner {
   position: fixed;
   top: 0;
   right: 0;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.spinner-loading {
+.spinner__loading {
   width: 64px;
   height: 64px;
   border: 8px solid;

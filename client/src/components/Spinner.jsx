@@ -2,8 +2,8 @@ import "../styles/Spinner.scss";
 
 const Spinner = () => {
   return (
-    <div className="spinner-container">
-      <div className="spinner-loading"></div>
+    <div className="spinner">
+      <div className="spinner__loading"></div>
     </div>
   )
 }
