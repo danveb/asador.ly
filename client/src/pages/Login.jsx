@@ -79,12 +79,12 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="login-top">
-        <div className="login-title">
+      <div className="login__wrapper">
+        <div className="login__head">
           <h1>Login</h1>
           <p>Login and start pinning your favorite <span>parrillas</span> in Buenos Aires.</p>
         </div>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <label
             htmlFor="username"
           >
@@ -96,6 +96,7 @@ const Login = () => {
             onChange={handleChange}
             type="text"
             placeholder="Your username"
+            autoComplete="username"
             required
           />
           <label
@@ -109,10 +110,13 @@ const Login = () => {
             onChange={handleChange}
             type="password"
             placeholder="Your password"
+            autoComplete="off"
             required
           />
           <button>Login</button>
-          <Link to="/register">Need to create a new account?</Link>
+          <div className="register__link">
+            <Link to="/register">Don't have an account?</Link>
+          </div>
         </form>
       </div>
     </div>

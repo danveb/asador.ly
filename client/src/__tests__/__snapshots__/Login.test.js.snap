@@ -6,10 +6,10 @@ exports[`Login component matches snapshot 1`] = `
     class="login"
   >
     <div
-      class="login-top"
+      class="login__wrapper"
     >
       <div
-        class="login-title"
+        class="login__head"
       >
         <h1>
           Login
@@ -23,7 +23,7 @@ exports[`Login component matches snapshot 1`] = `
         </p>
       </div>
       <form
-        class="login-form"
+        class="form"
       >
         <label
           for="username"
@@ -31,6 +31,7 @@ exports[`Login component matches snapshot 1`] = `
           Username
         </label>
         <input
+          autocomplete="username"
           id="username"
           name="username"
           placeholder="Your username"
@@ -44,6 +45,7 @@ exports[`Login component matches snapshot 1`] = `
           Password
         </label>
         <input
+          autocomplete="off"
           id="password"
           name="password"
           placeholder="Your password"
@@ -54,11 +56,15 @@ exports[`Login component matches snapshot 1`] = `
         <button>
           Login
         </button>
-        <a
-          href="/register"
+        <div
+          class="register__link"
         >
-          Need to create a new account?
-        </a>
+          <a
+            href="/register"
+          >
+            Don't have an account?
+          </a>
+        </div>
       </form>
     </div>
   </div>

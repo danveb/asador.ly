@@ -8,13 +8,13 @@ import "../styles/Register.scss";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
+    username: "",
     password: "",
   });
 
   // destructure formData 
-  const { username, email, password } = formData;
+  const { email, username, password } = formData;
 
   // useNavigate 
   const navigate = useNavigate();
@@ -61,8 +61,8 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {
-      username,
       email,
+      username,
       password
     };
     // error checking with toast... 
@@ -81,24 +81,12 @@ const Register = () => {
 
   return (
     <div className="register">
-      <div className="register-top">
-        <div className="register-title">
+      <div className="register__wrapper">
+        <div className="register__head">
           <h1>Register</h1>
           <p>Create an account to share with us your favorite <span>parrillas</span> in Buenos Aires.</p>
         </div>
-        <form className="register-form" onSubmit={handleSubmit}>
-          <label
-            htmlFor="username"
-          >Username</label>
-          <input
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleChange}
-            type="text"
-            placeholder="Create a username"
-            required
-          />
+        <form className="form" onSubmit={handleSubmit}>
           <label
             htmlFor="email"
           >Email</label>
@@ -109,6 +97,20 @@ const Register = () => {
             onChange={handleChange}
             type="email"
             placeholder="Your email address"
+            autoComplete="email"
+            required
+          />
+          <label
+            htmlFor="username"
+          >Username</label>
+          <input
+            id="username"
+            name="username"
+            value={username}
+            onChange={handleChange}
+            type="text"
+            placeholder="Create a username"
+            autoComplete="username"
             required
           />
           <label
@@ -121,10 +123,13 @@ const Register = () => {
             onChange={handleChange}
             type="password"
             placeholder="Your password"
+            autoComplete="off"
             required
           />
           <button>Register</button>
-          <Link to="/login">Already have an account?</Link>
+          <div className="login__link">
+            <Link to="/login">Already have an account?</Link>
+          </div>
         </form>
       </div>
     </div>

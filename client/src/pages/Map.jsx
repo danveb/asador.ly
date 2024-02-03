@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
-import Map, { Marker, Popup } from "react-map-gl";
+import Spinner from "../components/Spinner";
+import { Map as Mapbox, Marker, Popup } from "react-map-gl";
 import RoomIcon from '@mui/icons-material/Room';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useSelector, useDispatch } from "react-redux";
 import { createPin, getPins, reset } from "../redux/pins/pinSlice";
-import "../styles/MainMap.scss";
+import "../styles/Map.scss";
 import { toast } from "react-toastify";
 
-// workaround for mapbox failing (transpile issues with Babel) 
-// production build renders mapbox map, but tests are failing in development 
-import mapboxgl from 'mapbox-gl';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+/* 
+ * NOTE: 
+ * Using react-map-gl to render mapbox map (v7.0.18)
+ * Still need to install mapbox-gl (v2.9.2) to use mapbox stylesheet
+*/
 
-const MainMap = () => {
+const Map = () => {
   const { user } = useSelector((state) => state.auth);
   const { pins, isLoading, isError, message } = useSelector((state) => state.pins);
 
@@ -24,7 +24,7 @@ const MainMap = () => {
 
   // useState
   const [viewState, setViewState] = useState({
-    // main coordinates for center view
+    // main coordinates of Buenos Aires
     longitude: -58.403578,
     latitude: -34.608056,
     zoom: 11.5
@@ -80,7 +80,7 @@ const MainMap = () => {
         lng: longitude,
       });
     } else {
-      toast("Would you like to create an account? 👉", {
+      toast("Would you like to create an account?", {
         position: "top-center",
         autoClose: 3500,
         pauseOnHover: false,
@@ -123,7 +123,7 @@ const MainMap = () => {
 
   return (
     <div className="mainMap">
-      <Map
+      <Mapbox
         // controlled map (state)
         {...viewState}
         onMove={evt => setViewState(evt.viewState)}
@@ -247,9 +247,9 @@ const MainMap = () => {
             </div>
           </Popup>
         )}
-      </Map>
+      </Mapbox>
     </div>
   )
 }
 
-export default MainMap
+export default Map

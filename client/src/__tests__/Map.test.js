@@ -1,14 +1,14 @@
 import { render } from "@testing-library/react";
 import { store } from "../app/store";
 import { Provider } from "react-redux";
-import App from "../App";
+import { Map } from "../pages";
 
-describe("App component", () => {
+describe("Map component", () => {
   // smoke test
-  test("renders App component", () => {
+  test("renders Map component", () => {
     render(
       <Provider store={store}>
-        <App />
+        <Map />
       </Provider>
     );
   });
@@ -17,7 +17,7 @@ describe("App component", () => {
   test("matches snapshot", () => {
     const { asFragment } = render(
       <Provider store={store}>
-        <App />
+        <Map />
       </Provider>
     );
     expect(asFragment()).toMatchSnapshot();
